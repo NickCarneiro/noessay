@@ -12,6 +12,17 @@ SCHOOL_STATUS = (
     (1, 'Private nonprofit'),
     (2, 'For-profit')
 )
+
+class School(models.Model):
+    city = models.CharField()
+    state = USStateField
+    name = models.CharField()
+    description = models.CharField()
+    student_population = models.IntegerField()
+    undergrad_tuition_resident = models.IntegerField()
+    undergrad_tuition_nonresident = models.IntegerField()
+    profit_status = models.CharField(choices=SCHOOL_STATUS)
+
 # Create your models here.
 class Scholarship(models.Model):
     title = models.CharField()
@@ -31,16 +42,6 @@ class Scholarship(models.Model):
     third_party_url = models.URLField()
     amount_usd = models.IntegerField(blank=True)
     sponsored = models.BooleanField()
-
-class School(models.Model):
-    city = models.CharField()
-    state = USStateField
-    name = models.CharField()
-    description = models.CharField()
-    student_population = models.IntegerField()
-    undergrad_tuition_resident = models.IntegerField()
-    undergrad_tuition_nonresident = models.IntegerField()
-    profit_status = models.CharField(choices=SCHOOL_STATUS)
 
 
 
