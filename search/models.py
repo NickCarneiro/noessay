@@ -15,7 +15,7 @@ SCHOOL_STATUS = (
 
 class School(models.Model):
     city = models.CharField()
-    state = USStateField
+    state = USStateField()
     name = models.CharField()
     description = models.CharField()
     student_population = models.IntegerField()
