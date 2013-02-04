@@ -37,7 +37,7 @@ class Scholarship(models.Model):
     date_added = models.DateField()
     deadline = models.DateField(blank=True)
     essay_required = models.BooleanField()
-    amount_usd = models.IntegerField(blank=True)
+    amount_usd = models.IntegerField(blank=True, null=True)
     organization = models.CharField(max_length=200)
     min_age_restriction = models.SmallIntegerField(blank=True, null=True)
     state_restriction = USStateField(blank=True)
