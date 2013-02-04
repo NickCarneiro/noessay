@@ -21,10 +21,10 @@ class University(models.Model):
     state = USStateField()
     name = models.CharField(max_length=200)
     description = models.TextField()
-    student_population = models.IntegerField()
+    student_population = models.IntegerField(null=True)
     undergrad_tuition_resident = models.IntegerField()
     undergrad_tuition_nonresident = models.IntegerField()
-    profit_status = models.SmallIntegerField(choices=PROFIT_STATUS)
+    profit_status = models.SmallIntegerField(choices=PROFIT_STATUS, null=True)
 
     def __unicode__(self):
         return self.name
@@ -41,7 +41,7 @@ class Scholarship(models.Model):
     organization = models.CharField(max_length=200)
     min_age_restriction = models.SmallIntegerField(blank=True, null=True)
     state_restriction = USStateField(blank=True)
-    essay_length_words = models.IntegerField(blank=True)
+    essay_length_words = models.IntegerField(blank=True, null=True)
     gpa_restriction = models.FloatField(blank=True, null=True)
     additional_restriction = models.TextField(blank=True)
     major_restriction = models.CharField(max_length=100, blank=True)
