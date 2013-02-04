@@ -15,7 +15,7 @@ DATABASES = {
         'NAME': 'ne_search_dev',                      # Or path to database file if using sqlite3.
         'USER': 'ne_search_dev',                      # Not used with sqlite3.
         'PASSWORD': 'joebiden',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'HOST': 'noessay.com',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
@@ -105,7 +105,7 @@ ROOT_URLCONF = 'noessay.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'noessay.wsgi.application'
 
-TEMPLATE_DIRS = ('/Users/burt/development/noessay/templates',)
+TEMPLATE_DIRS = ('/Users/burt/development/ne/templates',)
 
 INSTALLED_APPS = (
     'django.contrib.auth',
