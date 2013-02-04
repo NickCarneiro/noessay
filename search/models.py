@@ -26,6 +26,9 @@ class School(models.Model):
     undergrad_tuition_nonresident = models.IntegerField()
     profit_status = models.SmallIntegerField(choices=PROFIT_STATUS)
 
+    def __unicode__(self):
+        return self.name
+
 # Create your models here.
 class Scholarship(models.Model):
     title = models.CharField(max_length=400)
@@ -46,6 +49,9 @@ class Scholarship(models.Model):
     third_party_url = models.URLField()
     amount_usd = models.IntegerField(blank=True)
     sponsored = models.BooleanField()
+
+    def __unicode__(self):
+        return self.title
 
 # make models available in admin
 admin.site.register(School)
