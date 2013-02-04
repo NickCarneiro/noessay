@@ -16,9 +16,10 @@ framework.
 import os
 import sys
 
-path = '/srv/pricegrapher/'
-if path not in sys.path:
-    sys.path.append(path)
+base = os.path.dirname(os.path.dirname(__file__))
+base_parent = os.path.dirname(base)
+sys.path.append(base)
+sys.path.append(base_parent)
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "noessay.settings")
 

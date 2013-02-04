@@ -1,5 +1,9 @@
 # Django settings for noessay project.
-
+import os, sys
+base = os.path.dirname(os.path.dirname(__file__))
+base_parent = os.path.dirname(base)
+sys.path.append(base)
+sys.path.append(base_parent)
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
