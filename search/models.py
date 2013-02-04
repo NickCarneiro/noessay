@@ -39,14 +39,14 @@ class Scholarship(models.Model):
     essay_required = models.BooleanField()
     amount_usd = models.IntegerField(blank=True)
     organization = models.CharField(max_length=200)
-    min_age_restriction = models.SmallIntegerField(blank=True)
+    min_age_restriction = models.SmallIntegerField(blank=True, null=True)
     state_restriction = USStateField(blank=True)
     essay_length_words = models.IntegerField(blank=True)
     gpa_restriction = models.FloatField(blank=True)
     additional_restriction = models.TextField(blank=True)
     major_restriction = models.CharField(max_length=100, blank=True)
     university_restriction = models.OneToOneField(University, blank=True)
-    gender_restriction = models.SmallIntegerField(choices=GENDER, blank=True)
+    gender_restriction = models.SmallIntegerField(choices=GENDER, blank=True, null=True)
     sponsored = models.BooleanField()
 
     def __unicode__(self):
