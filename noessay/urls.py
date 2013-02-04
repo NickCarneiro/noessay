@@ -7,7 +7,7 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'search.views.home', name='home'),
     # url(r'^noessay/', include('noessay.foo.urls')),
-
+    url(r'^error', 'search.views.error', name='error'),
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 

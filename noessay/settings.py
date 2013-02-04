@@ -105,7 +105,7 @@ ROOT_URLCONF = 'noessay.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'noessay.wsgi.application'
 
-TEMPLATE_DIRS = ('/Users/burt/development/ne/templates',)
+TEMPLATE_DIRS = ('/home/burt/development/ne/templates',)
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -139,13 +139,28 @@ LOGGING = {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': '/var/log/noessay.log',
+            },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
         }
     },
     'loggers': {
         'django.request': {
-            'handlers': ['mail_admins'],
+            'handlers': ['mail_admins', 'console', 'file'],
             'level': 'ERROR',
             'propagate': True,
+        },
+    },
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
         },
     }
 }
