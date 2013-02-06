@@ -8,7 +8,27 @@
     <link rel="stylesheet" href="/static/css/noessay.css" />
 </head>
 <body>
-<h1> NoEssay.com is the best place to find scholarships. </h1>
+<div id="home-container" class="container">
+    <div class="row">
+        <div class="span8 offset2 center-text">
+            <div id="logo-container" class="inline-block">
+                <h1 class="site-title">NoEssay.com</h1>
+                <span>The world's largest scholarship search engine</span>
+            </div>
+            <div class="search-controls left-text">
+                <form action="/scholarships" method="get">
+                    <div class="inline-block input-container">
+                        <label for="what">What</label> <input name="what" class="what-input" type="text" id="what" placeholder="Enter an area of study"/>
+                    </div>
+                    <div class="inline-block input-container">
+                        <label for="where">Where</label> <input name="where" class="what-input" type="text" id="where" />
+                    </div>
+                    <input class="block search-button" type="submit" value="Scholarship Search" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="static/js/jquery.js"></script>
 <script src="static/js/noessay.js"></script>
 </body>

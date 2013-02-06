@@ -1,0 +1,57 @@
+body {
+    background: url(/static/img/gray_jean.png) repeat;
+}
+input.what-input {
+    display: inline-block;
+    height: 30px;
+    font-size: 20px;
+    width: 95%;
+}
+
+.where-label {
+    display: inline-block;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.block {
+    display: block;
+}
+
+.search-button {
+    width: 100px;
+    margin: 0px auto;
+    font-size: 18px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.search-controls {
+    width: 500px;
+    margin: 0px auto;
+}
+
+.input-container {
+    width: 248px;
+}
+
+#home-container {
+}
+
+.site-title {
+    font-size: 50px;
+}
+
+#logo-container {
+    margin: 20% 0px 40px 0px;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.left-text {
+    text-align: left;
+}
