@@ -14,6 +14,15 @@ PROFIT_STATUS = (
     (2, 'For-profit')
 )
 
+ETHNICITIES = (
+    (0, 'American Indian/Alaska Native'),
+    (1, 'Asian'),
+    (2, 'Black/African American'),
+    (3, 'Native Hawaiian/Pacific Islander'),
+    (4, 'White/Caucasian'),
+    (5, 'International')
+)
+
 
 class University(models.Model):
     homepage_url = models.URLField()
@@ -45,7 +54,8 @@ class Scholarship(models.Model):
     gpa_restriction = models.FloatField(blank=True, null=True)
     additional_restriction = models.TextField(blank=True)
     major_restriction = models.CharField(max_length=100, blank=True)
-    university_restriction = models.OneToOneField(University, null=True, blank=True)
+    university_restriction = models.ManyToManyField(University, null=True, blank=True)
+    ethnicity_restriction = models.SmallIntegerField(choices=ETHNICITIES, blank=True, null=True)
     gender_restriction = models.SmallIntegerField(choices=GENDER, blank=True, null=True)
     sponsored = models.BooleanField()
 
