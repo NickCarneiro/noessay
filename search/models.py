@@ -20,7 +20,8 @@ ETHNICITIES = (
     (2, 'Black/African American'),
     (3, 'Native Hawaiian/Pacific Islander'),
     (4, 'White/Caucasian'),
-    (5, 'International')
+    (5, 'International'),
+    (6, 'Hispanic')
 )
 
 
