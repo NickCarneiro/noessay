@@ -54,7 +54,7 @@ class Scholarship(models.Model):
     essay_length_words = models.IntegerField(blank=True, null=True)
     gpa_restriction = models.FloatField(blank=True, null=True)
     additional_restriction = models.TextField(blank=True)
-    major_restriction = models.CharField(max_length=100, blank=True)
+    major_restriction = models.CharField(max_length=1000, blank=True)
     university_restriction = models.ManyToManyField(University, null=True, blank=True)
     ethnicity_restriction = models.SmallIntegerField(choices=ETHNICITIES, blank=True, null=True)
     gender_restriction = models.SmallIntegerField(choices=GENDER, blank=True, null=True)
