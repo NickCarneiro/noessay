@@ -1,6 +1,9 @@
+{% extends "navshell.html" %}
+{% block content %}
 Results
 <ul>
 {% for scholarship in scholarship_list %}
 <li>{{ scholarship.title }}</li>
 {% endfor %}
 </ul>
+{% endblock %}
