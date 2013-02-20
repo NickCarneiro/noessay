@@ -8,7 +8,8 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'search.views.home', name='home'),
-    url(r'^scholarships', 'search.views.serp', name='serp'),
+    url(r'^search', 'search.views.serp', name='serp'),
+    url(r'^scholarship', 'search.views.view_scholarship', name='serp'),
     url(r'^error', 'search.views.error', name='error'),
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

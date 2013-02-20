@@ -3,7 +3,7 @@
 Results
 <ul>
 {% for scholarship in scholarship_list %}
-<li>{{ scholarship.title }}</li>
+<li><a href="/scholarship?sk={{ scholarship.scholarship_key }}">{{ scholarship.scholarship_model.title }}</a></li>
 {% endfor %}
 </ul>
 {% endblock %}
