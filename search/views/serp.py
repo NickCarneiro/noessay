@@ -11,8 +11,9 @@ def serp(request):
     location = request.GET.get('l')
     search_req = SearchRequest(keyword, location)
 
-    scholarship_models = Scholarship.objects.filter(Q(title__icontains=search_req.keyword) or
-                                                Q(description__icontains=search_req.keyword))
+    scholarship_models = Scholarship.objects.filter(Q(title__icontains=search_req.keyword) |
+                                                Q(description__icontains=search_req.keyword) |
+                                                Q(organization__icontains=search_req.keyword))
     scholarships = []
     for scholarship in scholarship_models:
         sid = scholarship.id
