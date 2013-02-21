@@ -1,15 +1,25 @@
+#serp-container {
+    width: 528px;
+    background: #fff;
+    padding: 0 20px 0 20px;
+    box-shadow: 5px 5px 10px #dfdfdf;
+}
 .result-link {
     color: #12c;
-    font-weight: bold;
     font-size: 16px
 }
 
 .result-container {
-    margin-bottom: 23px
+    margin-bottom: 23px;
+    font-size: 13px;
 }
 
 .result-source {
     color: #093;
     font-size: small;
     line-height: 1.2;
+}
+
+.result-deadline {
+    color: #808080;
 }
