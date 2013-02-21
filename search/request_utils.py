@@ -13,9 +13,7 @@ def is_empty(str):
 
 # decrypt scholarship key (outputs scholarship id)
 def decrypt_sk(sk):
-    sk_hex = hex(long(sk)).replace('0x', '').replace('L', '')
-    hex_upper = sk_hex.upper()
-    print hex_upper
+    hex_upper = sk.upper()
     bytes = base64.b16decode(hex_upper)
     dec_hex = str(k.decrypt(bytes))
     dec = long(dec_hex, 16)
@@ -26,8 +24,7 @@ def encrypt_sid(sid):
     sid_hex = hex(sid).replace('0x', '')
     enc = k.encrypt(str(sid_hex))
     encrypted_hex = base64.b16encode(enc)
-    print encrypted_hex
-    return long(encrypted_hex, 16)
+    return encrypted_hex.lower()
 
 def test_encryption():
     x = 234567890
