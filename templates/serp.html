@@ -1,9 +1,7 @@
 {% extends "navshell.html" %}
 {% block content %}
-Results
-<ul>
+<link rel="stylesheet" href="/static/css/serp.css" />
 {% for scholarship in scholarship_list %}
-<li><a href="/scholarship?sk={{ scholarship.scholarship_key }}">{{ scholarship.scholarship_model.title }}</a></li>
+    {% include "result_fragment.html" with result=scholarship%}
 {% endfor %}
-</ul>
 {% endblock %}

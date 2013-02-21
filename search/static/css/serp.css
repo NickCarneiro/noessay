@@ -1,0 +1,15 @@
+.result-link {
+    color: #12c;
+    font-weight: bold;
+    font-size: 16px
+}
+
+.result-container {
+    margin-bottom: 23px
+}
+
+.result-source {
+    color: #093;
+    font-size: small;
+    line-height: 1.2;
+}

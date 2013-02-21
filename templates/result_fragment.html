@@ -1,0 +1,8 @@
+<div class="result-container">
+    <a class="result-link" href="{{ result.href }}" rel="nofollow">{{ result.title }}</a>
+    <div class="result-source">{{ result.source }}</div>
+    <div>{{ result.snippet }}</div>
+    {% if result.deadline %}
+    <div class="result-details">Deadline: {{ result.deadline }}</div>
+    {% endif %}
+</div>

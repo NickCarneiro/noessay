@@ -1,6 +1,4 @@
-body {
-    background: url(/static/img/gray_jean.png) repeat;
-}
+
 input.what-input {
     display: inline-block;
     height: 30px;
@@ -10,14 +8,6 @@ input.what-input {
 
 .where-label {
     display: inline-block;
-}
-
-.inline-block {
-    display: inline-block;
-}
-
-.block {
-    display: block;
 }
 
 .search-button {
@@ -37,9 +27,6 @@ input.what-input {
     width: 248px;
 }
 
-#home-container {
-}
-
 .site-title {
     font-size: 50px;
 }
@@ -48,10 +35,3 @@ input.what-input {
     margin: 20% 0px 40px 0px;
 }
 
-.center-text {
-    text-align: center;
-}
-
-.left-text {
-    text-align: left;
-}

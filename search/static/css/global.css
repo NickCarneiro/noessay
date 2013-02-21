@@ -1,0 +1,19 @@
+body {
+    background: url(/static/img/gray_jean.png) repeat;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.block {
+    display: block;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.left-text {
+    text-align: left;
+}
