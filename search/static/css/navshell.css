@@ -1,0 +1,19 @@
+#navshell-search-button {
+    margin-bottom: 10px;
+}
+
+#navshell-header-bar {
+    width: 100%;
+    background: #ffffff;
+    height: 70px;
+    padding: 10px 0 10px 10px;
+}
+
+#navshell-logo {
+    float: left;
+    width: 250px;
+}
+
+#navshell-search-controls {
+    margin: 0px 0 10px 30px;
+}
