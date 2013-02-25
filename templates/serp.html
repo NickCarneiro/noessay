@@ -1,7 +1,9 @@
 {% extends "navshell.html" %}
 {% block content %}
 <link rel="stylesheet" href="/static/css/serp.css" />
+<div id="left-col-container">
 
+</div>
 <div id="serp-container">
     {% for scholarship in scholarship_list %}
         {% include "result_fragment.html" with result=scholarship%}

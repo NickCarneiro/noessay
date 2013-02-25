@@ -17,7 +17,7 @@ def serp(request):
     scholarships = []
     for scholarship in scholarship_models:
         sid = scholarship.id
-        sk = request_utils.encrypt_sid(sid)
+        sk = request_utils.encrypt_sid(str(sid))
         result = SerpResult(sk, scholarship)
         scholarships.append(result)
-    return render_to_response('serp.html', {'scholarship_list': scholarships})
+    return render_to_response('serp.html', {'scholarship_list': scholarships, 'search_request': search_req})

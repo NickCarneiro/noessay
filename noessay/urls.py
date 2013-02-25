@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'search.views.home', name='home'),
     url(r'^search', 'search.views.serp', name='serp'),
+    url(r'^about', 'search.views.about', name='about'),
     url(r'^scholarship', 'search.views.view_scholarship', name='serp'),
     url(r'^error', 'search.views.error', name='error'),
     # Uncomment the admin/doc line below to enable admin documentation:
