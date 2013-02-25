@@ -5,7 +5,10 @@
 #navshell-header-bar {
     width: 100%;
     background: #ffffff;
-    height: 70px;
+    height: 90px;
+
+}
+#navshell-header-padding {
     padding: 10px 0 10px 10px;
 }
 

@@ -3,7 +3,7 @@ input.what-input {
     display: inline-block;
     height: 30px;
     font-size: 20px;
-    width: 95%;
+    width: 230px;
 }
 
 .where-label {
@@ -15,15 +15,17 @@ input.what-input {
     font-size: 18px;
     padding: 10px;
     margin-top: 10px;
+    width: 200px;
 }
 
-.search-controls {
-    width: 500px;
+#search-controls {
     margin: 0px auto;
+    width: 510px;
+    height: 70px;
 }
 
 .input-container {
-    width: 248px;
+    float: left;
 }
 
 .site-title {
@@ -31,6 +33,18 @@ input.what-input {
 }
 
 #logo-container {
-    margin: 20% 0px 40px 0px;
+    margin: 20% 0px 20px 0px;
 }
 
+#location-combobox-container {
+    margin-left: 10px;
+}
+
+#location-combobox-container .select2-container .select2-choice {
+    height: 36px;
+    font-size: 18px;
+}
+
+#location-combobox-container .select2-choice > span {
+    margin-top: 4px;
+}
