@@ -1,3 +1,5 @@
 $(document).ready(function() {
-    $('#location-combobox').select2({width: 180});
+    var $locationCombobox = $('#location-combobox');
+    $locationCombobox.select2({width: 180});
+    $locationCombobox.val(ne.state).trigger('change');
 });

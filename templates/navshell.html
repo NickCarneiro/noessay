@@ -29,7 +29,7 @@
             </div>
             <div id="location-container">
                 <label for="location-combobox">Where</label>
-                <select id="location-combobox" name="l" data-placeholder="State" value=" {{ search_request.location }}">
+                <select id="location-combobox" name="l">
                     <option value="US">Any State</option>
                     <option value="AL">Alabama</option>
                     <option value="AK">Alaska</option>
@@ -101,4 +101,5 @@
     Browse Scholarships - <a href="/about">About</a> - Contact
 </div>
 </body>
+{% include 'footer_script.html' %}
 </html>
