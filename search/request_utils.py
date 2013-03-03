@@ -54,7 +54,7 @@ def test_encryption():
     print y
     print decrypt_sk(y)
 
-test_encryption()
+#test_encryption()
 
 
 

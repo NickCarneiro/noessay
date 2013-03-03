@@ -1,12 +1,53 @@
 {% extends "navshell.html" %}
 {% block content %}
 <link rel="stylesheet" href="/static/css/serp.css" />
-<div id="left-col-container">
+<link rel="stylesheet" href="/static/css/jquery-ui-1.10.1.custom.css" />
+<script src="/static/js/jquery-ui-1.10.1.custom.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/serp.js"></script>
+<div class="row">
+    <div id="left-col-container" class="span3">
+        <h4>Refine your search</h4>
+            <div>
+                <label for="refine-essay-required">Essay Required</label>
+                <div id="refine-essay-required"  class="btn-group" data-toggle="buttons-radio">
+                    <button type="button" class="btn btn-primary">Yes</button>
+                    <button type="button" class="btn btn-primary active">No</button>
+                </div>
 
-</div>
-<div id="serp-container">
-    {% for scholarship in scholarship_list %}
-        {% include "result_fragment.html" with result=scholarship%}
-    {% endfor %}
+            </div>
+            <div>
+                <label for="refine-deadline">Deadline after</label>
+                <input id="refine-deadline" type="text" />
+            </div>
+        <div>
+            <label for="refine-deadline">Gender Restriction</label>
+            <select id="refine-gender">
+                <option value="-1">None</option>
+                <option value="0">Male</option>
+                <option value="1">Female</option>
+                <option value="2">Other</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="refine-deadline">Race / Ethnicity</label>
+            <select id="refine-ethnicity">
+                <option value="-1">None</option>
+                <option value="0">Native American Indian</option>
+                <option value="1">Asian</option>
+                <option value="2">Black</option>
+                <option value="3">Native Hawaiian/Pacific Islander</option>
+                <option value="4">White</option>
+                <option value="5">Latino/Hispanic</option>
+                <option value="6">International</option>
+            </select>
+        </div>
+    </div>
+    <div class="span9" id="serp-container">
+        {% for scholarship in scholarship_list %}
+            {% include "result_fragment.html" with result=scholarship%}
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}

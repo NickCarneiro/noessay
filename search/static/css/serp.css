@@ -1,9 +1,12 @@
 #serp-container {
-    width: 528px;
     background: #fff;
-    padding: 0 20px 0 20px;
-    box-shadow: 5px 5px 10px #dfdfdf;
-    margin: 20px 0 0 270px;
+    box-shadow: -3px 0px 5px #dfdfdf;
+    padding: 10px;
+}
+
+#left-col-container {
+    background: #ebebeb;
+    padding: 10px;
 }
 .result-link {
     color: #12c;
