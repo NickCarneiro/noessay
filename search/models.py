@@ -41,8 +41,8 @@ class University(models.Model):
 
 # Create your models here.
 class Scholarship(models.Model):
-    third_party_url = models.URLField()
     title = models.CharField(max_length=400)
+    third_party_url = models.URLField()
     description = models.TextField()
     date_added = models.DateField()
     deadline = models.DateField(blank=True)
