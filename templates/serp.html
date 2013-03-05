@@ -9,11 +9,9 @@
     <div id="left-col-container" class="span3">
         <h4>Refine your search</h4>
             <div>
-                <label for="refine-essay-required">Essay Required</label>
-                <div id="refine-essay-required"  class="btn-group" data-toggle="buttons-radio">
-                    <button type="button" class="btn btn-primary">Yes</button>
-                    <button type="button" class="btn btn-primary active">No</button>
-                </div>
+                <label class="checkbox" for="refine-essay-required">
+                    <input type="checkbox" id="refine-essay-required" value="essay-required">No essay required
+                </label>
 
             </div>
             <div>
@@ -31,7 +29,7 @@
         </div>
 
         <div>
-            <label for="refine-deadline">Race / Ethnicity</label>
+            <label for="refine-deadline">Race / Ethnicity Restriction</label>
             <select id="refine-ethnicity">
                 <option value="-1">None</option>
                 <option value="0">Native American Indian</option>
