@@ -4,8 +4,7 @@ import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "noessay.settings")
 
 from pyes import *
-from pyes.mappings import *
-from search.models import Scholarship
+from search.models import *
 
 conn = ES('noessay.com:9200')
 DEV_INDEX = 'noessay-dev'
@@ -21,7 +20,17 @@ def create_index():
     conn.indices.create_index(DEV_INDEX)
 
     mapping = {
+        'django_id': {
+            'index': 'no',
+            'store': 'yes',
+            'type': 'long'
+        },
         'title': {
+            'index': 'analyzed',
+            'store': 'yes',
+            'type': 'string'
+        },
+        'title_and_description': {
             'index': 'analyzed',
             'store': 'yes',
             'type': 'string'
@@ -124,12 +133,19 @@ def populate_index():
     for s in scholarships:
         print s.title
         university_name = None
+        gender_restriction = None
+        ethnicity_restriction = None
         universities = s.university_restriction.all()
         if universities:
-            university_name = universities[0]
-
+            university_name = universities[0].name
+        if s.gender_restriction:
+            gender_restriction = GENDER[s.gender_restriction]
+        if s.ethnicity_restriction:
+            ethnicity_restriction = ETHNICITIES[s.ethnicity_restriction]
         scholarship_es = {
+            'django_id': s.id,
             'title': s.title,
+            'title_and_description': s.title + ' ' + s.description,
             'third_party_url': s.third_party_url,
             'description': s.description,
             'date_added': s.date_added,
@@ -139,13 +155,13 @@ def populate_index():
             'organization': s.organization,
             'min_age_restriction': s.min_age_restriction,
             'state_restriction': s.state_restriction,
-            'essay_length_words': s.essay_required,
+            'essay_length_words': s.essay_length_words,
             'gpa_restriction': s.gpa_restriction,
             'additional_restriction': s.additional_restriction,
             'major_restriction': s.major_restriction,
             'university_restriction': university_name,
-            'ethnicity_restriction': s.ethnicity_restriction,
-            'gender_restriction': s.gender_restriction,
+            'ethnicity_restriction': ethnicity_restriction,
+            'gender_restriction': gender_restriction,
             'sponsored': s.sponsored
         }
         conn.index(scholarship_es, DEV_INDEX, SCHOLARSHIP_TYPE)
@@ -159,4 +175,5 @@ def query_index():
 
 
 
+create_index()
 populate_index()

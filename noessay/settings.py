@@ -168,3 +168,8 @@ LOGGING = {
         },
     }
 }
+
+#elasticsearch settings
+DEV_INDEX = 'noessay-dev'
+PROD_INDEX = 'noessay-prod'
+SCHOLARSHIP_TYPE = 'scholarship'
