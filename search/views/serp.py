@@ -7,6 +7,7 @@ from django.db.models import Q
 from search.serp_result import SerpResult
 from pyes import *
 from search.models import *
+from search.request_utils import *
 ELASTICSEARCH_URL = 'noessay.com:9200'
 
 def serp(request):
@@ -14,10 +15,10 @@ def serp(request):
     location = request.GET.get('l')
 
     # refine params
-    no_essay_required = 'true' == request.GET.get('ne')
-    deadline = request.GET.get('d')
-    ethnicity = request.GET.get('e')
-    gender = request.GET.get('g')
+    no_essay_required = parse_boolean_param(request.GET.get('ne'))
+    deadline = parse_string_param(request.GET.get('d'), None)
+    ethnicity = parse_int_param(request.GET.get('e'), None)
+    gender = parse_int_param(request.GET.get('g'), None)
     refine = no_essay_required or deadline or ethnicity or gender
 
     search_req = SearchRequest(keyword, location, no_essay_required,
@@ -47,7 +48,7 @@ def serp(request):
         refine_restrictions = []
         if no_essay_required:
             refine_restrictions.append({
-                'term': { 'essay_required': False}
+                'term': { 'essay_required': False }
             })
         if deadline:
             refine_restrictions.append({

@@ -55,6 +55,24 @@ def test_encryption():
     print decrypt_sk(y)
 
 #test_encryption()
+def parse_string_param(param, default):
+    if param is None or param == '':
+        return default
+    else:
+        return param
+
+def parse_int_param(param, default):
+    try:
+        parsed = int(param)
+    except TypeError:
+        parsed = default
+    except ValueError:
+        parsed = default
+    return parsed
+
+def parse_boolean_param(param):
+    parsed = param == 'true' or param == 'True' or param == '1'
+    return parsed
 
 
 
