@@ -9,20 +9,20 @@
     <div id="left-col-container" class="span3">
         <h4>Refine your search</h4>
             <div>
-                <label class="checkbox" for="refine-essay-required">
-                    <input type="checkbox" id="refine-essay-required" value="essay-required">No essay required
+                <label class="checkbox" for="refine-no-essay-required">
+                    <input type="checkbox" id="refine-no-essay-required" value="essay-required" {% if search_request.no_essay_required %}checked{% endif %}>No essay required
                 </label>
 
             </div>
             <div>
                 <label for="refine-deadline">Deadline after</label>
-                <input id="refine-deadline" type="text" />
+                <input id="refine-deadline" type="text"/>
             </div>
 
         <div>
-            <label for="refine-deadline">Race / Ethnicity Restriction</label>
+            <label for="refine-ethnicity">Race / Ethnicity Restriction</label>
             <select id="refine-ethnicity">
-                <option value="-1">None</option>
+                <option value="">None</option>
                 <option value="0">Native American Indian</option>
                 <option value="1">Asian</option>
                 <option value="2">Black</option>
@@ -35,11 +35,14 @@
         <div>
             <label for="refine-gender">Gender Restriction</label>
             <select id="refine-gender">
-                <option value="-1">None</option>
+                <option value="">None</option>
                 <option value="0">Male</option>
                 <option value="1">Female</option>
                 <option value="2">Other</option>
             </select>
+        </div>
+        <div>
+            <button id="refine-submit" class="btn">Refine</button>
         </div>
     </div>
     <div class="span9" id="serp-container">
