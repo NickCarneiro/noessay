@@ -5,6 +5,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "noessay.settings")
 
 from pyes import *
 from search.models import *
+from search.elasticsearch_fields import EsFields as es
 
 conn = ES('noessay.com:9200')
 DEV_INDEX = 'noessay-dev'
@@ -20,105 +21,100 @@ def create_index():
     conn.indices.create_index(DEV_INDEX)
 
     mapping = {
-        'django_id': {
+        es.django_id: {
             'index': 'no',
             'store': 'yes',
             'type': 'long'
         },
-        'title': {
+        es.title: {
             'index': 'analyzed',
             'store': 'yes',
             'type': 'string'
         },
-        'title_and_description': {
-            'index': 'analyzed',
-            'store': 'yes',
-            'type': 'string'
-        },
-        'third_party_url': {
+        es.third_party_url: {
             'index': 'no',
             'store': 'yes',
             'type': 'string'
         },
-        'description': {
+        es.description: {
             'index': 'analyzed',
             'store': 'yes',
             'type': 'string'
         },
-        'date_added': {
+        es.date_added: {
             'index': 'analyzed',
             'store': 'yes',
             'type': 'date'
         },
-        'deadline': {
+        es.deadline: {
             'index': 'analyzed',
             'store': 'yes',
             'type': 'date'
         },
-        'essay_required': {
+        es.essay_required: {
             'index': 'analyzed',
             'store': 'yes',
             'type': 'boolean'
         },
-        'amount_usd': {
+        es.amount_usd: {
             'index': 'analyzed',
             'store': 'yes',
             'type': 'integer'
         },
-        'organization': {
+        es.organization: {
             'index': 'analyzed',
             'store': 'yes',
             'type': 'string'
         },
-        'min_age_restriction': {
+        es.min_age_restriction: {
             'index': 'analyzed',
             'store': 'yes',
             'type': 'integer'
         },
-        'state_restriction': { # 2 letter postal code like TX
-            'index': 'analyzed',
+        es.state_restriction: { # 2 letter postal code like TX
+            'index': 'not_analyzed',
             'store': 'yes',
             'type': 'string'
         },
-        'essay_length_words': {
+        es.essay_length_words: {
             'index': 'analyzed',
             'store': 'yes',
             'type': 'integer'
         },
-        'gpa_restriction': {
+        es.gpa_restriction: {
             'index': 'analyzed',
             'store': 'yes',
             'type': 'float'
         },
-        'additional_restriction': {
+        es.additional_restriction: {
             'index': 'no',
             'store': 'yes',
             'type': 'string'
         },
-        'major_restriction': {
+        es.major_restriction: {
             'index': 'analyzed',
             'store': 'yes',
             'type': 'string'
         },
         # ensure that these values always come from the universities table
-        'university_restriction': {
+        es.university_restriction: {
             'index': 'analyzed',
             'store': 'yes',
             'type': 'string'
         },
         # ensure that these values always come from the Choices in models
-        'ethnicity_restriction': {
+        es.ethnicity_restriction: {
             'index': 'analyzed',
             'store': 'yes',
             'type': 'string'
         },
         # ensure that these values always come from the Choices in models
-        'gender_restriction': {
+        es.gender_restriction: {
             'index': 'analyzed',
             'store': 'yes',
             'type': 'string'
         },
-        'sponsored': {
+        es.sponsored: {
             'index': 'analyzed',
             'store': 'yes',
             'type': 'boolean'

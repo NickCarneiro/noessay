@@ -1,4 +1,4 @@
-from django.contrib.localflavor.us.models import USStateField
+from django_localflavor_us.models import USStateField
 from django.contrib import admin
 from django.db import models
 GENDER = (

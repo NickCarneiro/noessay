@@ -8,7 +8,10 @@ from search.serp_result import SerpResult
 from pyes import *
 from search.models import *
 from search.request_utils import *
+from search.elasticsearch_fields import EsFields as es
+
 ELASTICSEARCH_URL = 'noessay.com:9200'
+
 
 def serp(request):
     keyword = request.GET.get('q')
@@ -24,31 +27,30 @@ def serp(request):
     search_req = SearchRequest(keyword, location, no_essay_required,
         deadline, ethnicity, gender)
     conn = ES(ELASTICSEARCH_URL)
+
+    # empty query
     if not keyword and location == 'US':
         query = MatchAllQuery()
-    elif not refine:
-        query = {
-            "filtered" : {
-                "query" : {
-                    "term" : { "title_and_description" : keyword }
-                }
-            }
-        }
-        # add state restriction if we had one
-        if location and location != 'US':
-            query['filter'] = {
-                "and" : [
-                    {
-                        "state" : location
-                    }
-                ]
-            }
+
+    # got a keyword but no state
+    elif keyword and not refine and location and location == 'US':
+        query = MultiMatchQuery(text=keyword, fields=[es.title, es.description])
+
+    # got a keyword and a state
+    elif keyword and not refine and location and location != 'US':
+        multi_query = MultiMatchQuery(text=keyword, fields=[es.title, es.description])
+        state_term_filter = TermFilter(es.state_restriction, location)
+        query = FilteredQuery(multi_query, state_term_filter)
+
+    # no keyword but a state
+    elif not keyword and location and location != 'US':
+        query = TermQuery(field=es.state_restriction, value=location)
     else:
         # got refine params
         refine_restrictions = []
         if no_essay_required:
             refine_restrictions.append({
-                'term': { 'essay_required': False }
+                'term': { es.essay_required: False }
             })
         if deadline:
             refine_restrictions.append({
@@ -61,12 +63,12 @@ def serp(request):
         if ethnicity:
             ethnicity_string = ETHNICITIES[ethnicity]
             refine_restrictions.append({
-                'term': { 'gender_restriction': ethnicity_string}
+                'term': { es.ethnicity_restriction: ethnicity_string}
             })
         if gender:
             gender_string = GENDER[gender]
             refine_restrictions.append({
-                'term': { 'gender_restriction': gender_string}
+                'term': { es.gender_restriction: gender_string}
             })
 
         query = {
