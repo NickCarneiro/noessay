@@ -1,9 +1,8 @@
 import base64
 from django.shortcuts import render_to_response
+from noessay.settings import DEV_INDEX
 from search import request_utils
-from search.models import Scholarship
 from search.search_request import SearchRequest
-from django.db.models import Q
 from search.serp_result import SerpResult
 from pyes import *
 from search.models import *
@@ -11,7 +10,6 @@ from search.request_utils import *
 from search.elasticsearch_fields import EsFields as es
 
 ELASTICSEARCH_URL = 'noessay.com:9200'
-
 
 def serp(request):
     keyword = request.GET.get('q')
@@ -73,7 +71,6 @@ def serp(request):
 
         query = {
             'filtered': {
-
                 'query': {
                     'match_all': {}
                 },
@@ -82,12 +79,14 @@ def serp(request):
                 }
             }
         }
-
-    results = conn.search(query=query)
+    search = Search(query)
+    search.add_highlight(es.description, fragment_size=300, number_of_fragments=5)
+    results = conn.search(search, indices=DEV_INDEX)
     scholarships = []
     for scholarship in results:
         #print scholarship
         sid = scholarship.django_id
+        scholarship.description = scholarship._meta.highlight['description'][0]
         sk = request_utils.encrypt_sid(str(sid))
         result = SerpResult(sk, scholarship)
         scholarships.append(result)

@@ -21,4 +21,3 @@ class EsFields():
     ethnicity_restriction = 'ethnicity_restriction' 
     gender_restriction = 'gender_restriction' 
     sponsored = 'sponsored'
-

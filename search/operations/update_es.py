@@ -39,7 +39,8 @@ def create_index():
         es.description: {
             'index': 'analyzed',
             'store': 'yes',
-            'type': 'string'
+            'type': 'string',
+            'term_vector': 'with_positions_offsets'
         },
         es.date_added: {
             'index': 'analyzed',
@@ -141,7 +142,6 @@ def populate_index():
         scholarship_es = {
             'django_id': s.id,
             'title': s.title,
-            'title_and_description': s.title + ' ' + s.description,
             'third_party_url': s.third_party_url,
             'description': s.description,
             'date_added': s.date_added,

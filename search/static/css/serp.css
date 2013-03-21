@@ -36,3 +36,12 @@
     width: 100%;
     height: 20px;
 }
+
+.accent {
+    font-weight: bold;
+}
+
+em {
+    font-style: normal;
+    font-weight: bold;
+}
