@@ -27,3 +27,12 @@
 .result-deadline {
     color: #808080;
 }
+
+.pagination-label {
+    float: right;
+}
+
+.serp-promo-container {
+    width: 100%;
+    height: 20px;
+}

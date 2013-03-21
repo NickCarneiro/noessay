@@ -4,7 +4,7 @@
     <div>{{ result.snippet }}...</div>
     {% if result.deadline %}
     <div class="result-details">
-        <span class="result-deadline">Deadline: {{ result.deadline }}</span>
+        <span class="result-deadline">Deadline: {{ result.deadline|date:'M d, Y' }}</span>
     </div>
     {% endif %}
 </div>

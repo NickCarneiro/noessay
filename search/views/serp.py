@@ -91,4 +91,8 @@ def serp(request):
         sk = request_utils.encrypt_sid(str(sid))
         result = SerpResult(sk, scholarship)
         scholarships.append(result)
-    return render_to_response('serp.html', {'scholarship_list': scholarships, 'search_request': search_req})
+    return render_to_response('serp.html',
+        {'scholarship_list': scholarships,
+         'search_request': search_req,
+         'result_count': len(scholarships)
+        })

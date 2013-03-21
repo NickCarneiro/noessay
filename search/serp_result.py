@@ -5,7 +5,7 @@ class SerpResult:
         self.scholarship_model = scholarship_model
         self.snippet = scholarship_model.description[:250]
         if scholarship_model is not None:
-            self.deadline = str(scholarship_model.deadline)
+            self.deadline = scholarship_model.deadline
         self.source = scholarship_model.organization
         self.href = scholarship_model.third_party_url
         self.title = scholarship_model.title
