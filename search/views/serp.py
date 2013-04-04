@@ -1,4 +1,3 @@
-import base64
 from django.shortcuts import render_to_response
 from noessay.settings import DEV_INDEX
 from search import request_utils
