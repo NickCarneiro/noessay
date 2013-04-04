@@ -10,6 +10,7 @@ from search.request_utils import *
 from search.elasticsearch_fields import EsFields as es
 
 ELASTICSEARCH_URL = 'noessay.com:9200'
+DESCRIPTION_LENGTH = 300
 
 def serp(request):
     keyword = request.GET.get('q')
@@ -83,15 +84,21 @@ def serp(request):
     search.add_highlight(es.description, fragment_size=300, number_of_fragments=5)
     results = conn.search(search, indices=DEV_INDEX)
     scholarships = []
-    for scholarship in results:
+    for schol in results:
         #print scholarship
-        sid = scholarship.django_id
-        scholarship.description = scholarship._meta.highlight['description'][0]
+        sid = schol.django_id
+        if schol._meta.highlight:
+            schol.description = schol._meta.highlight['description'][0]
+        else :
+            schol.description = description_to_snippet(schol.description)
         sk = request_utils.encrypt_sid(str(sid))
-        result = SerpResult(sk, scholarship)
+        result = SerpResult(sk, schol)
         scholarships.append(result)
     return render_to_response('serp.html',
         {'scholarship_list': scholarships,
          'search_request': search_req,
          'result_count': len(scholarships)
         })
+
+def description_to_snippet(desc):
+    return desc[:DESCRIPTION_LENGTH].rsplit(' ', 1)[0] + '...'

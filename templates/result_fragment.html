@@ -1,7 +1,7 @@
 <div class="result-container">
     <a class="result-link" href="{{ result.href }}" rel="nofollow" target="_blank">{{ result.title }}</a>
     <div class="result-source">{{ result.source }}</div>
-    <div>{{ result.snippet|safe }}...</div>
+    <div>{{ result.snippet|safe }}</div>
     {% if result.deadline %}
     <div class="result-details">
         <span class="result-deadline">Deadline: {{ result.deadline|date:'M d, Y' }}</span>
