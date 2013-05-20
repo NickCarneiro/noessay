@@ -45,3 +45,7 @@ em {
     font-style: normal;
     font-weight: bold;
 }
+
+#pagination {
+    text-align: center;
+}

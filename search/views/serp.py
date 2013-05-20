@@ -85,7 +85,7 @@ def serp(request):
     search = Search(query, size=RESULTS_PER_PAGE, start=start)
     search.add_highlight(es.description, fragment_size=300, number_of_fragments=5)
     results = conn.search(search, indices=DEV_INDEX)
-    total_results = results.total
+    total_result_count = results.total
     scholarships = []
     for schol in results:
         sid = schol.django_id
@@ -97,13 +97,24 @@ def serp(request):
         result = SerpResult(sk, schol)
 
         scholarships.append(result)
-    page_links = build_pagination_objects(scholarships, total_results, start, search_req)
+    page_links = build_pagination_objects(total_result_count, start, search_req)
+    is_first_page = start == 0
+    is_last_page = RESULTS_PER_PAGE + start >= total_result_count
+    next_page_href = search_req.get_base_url(start + RESULTS_PER_PAGE)
+    prev_page_href = search_req.get_base_url(start - RESULTS_PER_PAGE)
     return render_to_response('serp.html',
                               {
                                   'scholarship_list': scholarships,
                                   'search_request': search_req,
-                                  'result_count': total_results,
-                                  'page_links': page_links
+                                  'result_count': total_result_count,
+                                  'page_links': page_links,
+                                  'is_first_page': is_first_page,
+                                  'is_last_page': is_last_page,
+                                  'prev_page_href': prev_page_href,
+                                  'next_page_href': next_page_href,
+                                  'start_index': start + 1,
+                                  'end_index': min(start + 1 + RESULTS_PER_PAGE, total_result_count),
+                                  'results_per_page': RESULTS_PER_PAGE
                               }
     )
 
@@ -112,24 +123,36 @@ def description_to_snippet(desc):
     return desc[:DESCRIPTION_LENGTH].rsplit(' ', 1)[0] + '...'
 
 
-def build_pagination_objects(scholarships, total_results, start, search_req):
-    if total_results == 0:
+def build_pagination_objects(result_count, start, search_req):
+    if result_count == 0:
         return []
+    if start % RESULTS_PER_PAGE != 0:
+        start = 0
     # page numbers have to start at 1 because users are human
-    current_page_number = start / total_results * RESULTS_PER_PAGE + 1
+    current_page_number = start / RESULTS_PER_PAGE + 1
     # add non-link for current page
     links = [{'current_page': True, 'page_number': current_page_number, 'start': start}]
     # try to add up to 5 forward pages
     for i in range(1, 6):
         page_start = start + i * RESULTS_PER_PAGE
-        if page_start > total_results:
+        if page_start >= result_count:
             break
-        links.append({'current_page': False, 'page_number': current_page_number + i, 'start': page_start})
+        href = search_req.get_base_url(page_start)
+        links.append({'current_page': False,
+                      'page_number': current_page_number + i,
+                      'start': page_start,
+                      'href': href
+        })
     # try to prepend 5 pages backward
     for i in range(1, 6):
         page_start = start - i * RESULTS_PER_PAGE
-        if page_start <= 0:
+        if page_start < 0:
             break
-        links.append({'current_page': False, 'page_number': current_page_number - i, 'start': page_start})
+        href = search_req.get_base_url(page_start)
+        links.insert(0, {'current_page': False,
+                         'page_number': current_page_number - i,
+                         'start': page_start,
+                         'href': href
+        })
     return links
 

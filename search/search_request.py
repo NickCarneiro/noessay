@@ -10,5 +10,10 @@ class SearchRequest:
         self.ethnicity_restriction = ethnicity_restriction
         self.gender_restriction = gender_restriction
 
-    def get_base_url(self):
-        return '/?q=' + self.keyword
+    def get_base_url(self, start):
+        url = '/search?q=' + self.keyword
+        if self.location is not None:
+            url = url + '&l=' + self.location
+        if start is not None and start > 0:
+            url = url + '&start=' + str(start)
+        return url

@@ -47,22 +47,33 @@
     </div>
     <div class="span9" id="serp-container">
     <div class="serp-promo-container">
-        <span class="pagination-label">Scholarships 1 to 10 of {{ result_count }}</span>
+        <span class="pagination-label">
+            Scholarships {{ start_index }} to {{ end_index }} of {{ result_count }}
+        </span>
     </div>
         {% for scholarship in scholarship_list %}
             {% include "result_fragment.html" with result=scholarship%}
         {% endfor %}
+
+        <div id="pagination">
+        {% if is_first_page == False %}
+            <a href="{{ prev_page_href }}">&lt;&lt; Previous</a>
+        {% endif %}
+            {#        we've precomputed the pages#}
+            {% for link in page_links%}
+                {% if link.current_page %}
+                    {{ link.page_number }}
+                {% else %}
+                    <a href="{{ link.href }}">{{ link.page_number }}</a>
+                {% endif %}
+            {% endfor %}
+        {% if is_last_page == False %}
+            <a href="{{ next_page_href }}">Next &gt;&gt;</a>
+
+        {% endif %}
+        </div>
     </div>
-    <div id="pagination">
-{#        we've precomputed the pages#}
-        {% for link in page_links%}
-            {% if link.current_page %}
-                {{ link.page_number }}
-            {% else %}
-                <a href="{{ link.href }}">{{ link.page_number }}</a>
-            {% endif %}
-        {% endfor %}
-    </div>
+
 
 </div>
 {% endblock %}
