@@ -10,14 +10,14 @@ from search.elasticsearch_fields import EsFields as es
 
 ELASTICSEARCH_URL = 'noessay.com:9200'
 DESCRIPTION_LENGTH = 300
-PAGE_LENGTH = 10
+RESULTS_PER_PAGE = 10
 def serp(request):
     keyword = request.GET.get('q')
     location = request.GET.get('l')
 
     # refine params
     start = parse_int_param(request.GET.get('start'), 0)
-    if start % PAGE_LENGTH != 0:
+    if start % RESULTS_PER_PAGE != 0:
         start = 0
     no_essay_required = parse_boolean_param(request.GET.get('ne'))
     deadline = parse_string_param(request.GET.get('d'), None)
@@ -82,7 +82,7 @@ def serp(request):
                 }
             }
         }
-    search = Search(query, size=PAGE_LENGTH, start=start)
+    search = Search(query, size=RESULTS_PER_PAGE, start=start)
     search.add_highlight(es.description, fragment_size=300, number_of_fragments=5)
     results = conn.search(search, indices=DEV_INDEX)
     total_results = results.total
@@ -91,31 +91,45 @@ def serp(request):
         sid = schol.django_id
         if schol._meta.highlight:
             schol.description = schol._meta.highlight['description'][0]
-        else :
+        else:
             schol.description = description_to_snippet(schol.description)
         sk = request_utils.encrypt_sid(str(sid))
         result = SerpResult(sk, schol)
 
         scholarships.append(result)
-    build_pagination_objects(scholarships, total_results)
+    page_links = build_pagination_objects(scholarships, total_results, start, search_req)
     return render_to_response('serp.html',
-        {'scholarship_list': scholarships,
-         'search_request': search_req,
-         'result_count': total_results
-        })
+                              {
+                                  'scholarship_list': scholarships,
+                                  'search_request': search_req,
+                                  'result_count': total_results,
+                                  'page_links': page_links
+                              }
+    )
+
 
 def description_to_snippet(desc):
     return desc[:DESCRIPTION_LENGTH].rsplit(' ', 1)[0] + '...'
 
-def build_pagination_objects(scholarships, total_results):
-    max_links = 10
-    pages = total_results / PAGE_LENGTH
-    links = []
-    link_count = min(max_links, pages)
-    current_page = link_count / 2
-    for i in range(link_count):
-        link = {
-            url: '/'
-        }
-        links.add
+
+def build_pagination_objects(scholarships, total_results, start, search_req):
+    if total_results == 0:
+        return []
+    # page numbers have to start at 1 because users are human
+    current_page_number = start / total_results * RESULTS_PER_PAGE + 1
+    # add non-link for current page
+    links = [{'current_page': True, 'page_number': current_page_number, 'start': start}]
+    # try to add up to 5 forward pages
+    for i in range(1, 6):
+        page_start = start + i * RESULTS_PER_PAGE
+        if page_start > total_results:
+            break
+        links.append({'current_page': False, 'page_number': current_page_number + i, 'start': page_start})
+    # try to prepend 5 pages backward
+    for i in range(1, 6):
+        page_start = start - i * RESULTS_PER_PAGE
+        if page_start <= 0:
+            break
+        links.append({'current_page': False, 'page_number': current_page_number - i, 'start': page_start})
+    return links
 

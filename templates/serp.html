@@ -54,7 +54,14 @@
         {% endfor %}
     </div>
     <div id="pagination">
-        {% for %}
+{#        we've precomputed the pages#}
+        {% for link in page_links%}
+            {% if link.current_page %}
+                {{ link.page_number }}
+            {% else %}
+                <a href="{{ link.href }}">{{ link.page_number }}</a>
+            {% endif %}
+        {% endfor %}
     </div>
 
 </div>

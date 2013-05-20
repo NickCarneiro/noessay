@@ -9,3 +9,6 @@ class SearchRequest:
         self.deadline = deadline
         self.ethnicity_restriction = ethnicity_restriction
         self.gender_restriction = gender_restriction
+
+    def get_base_url(self):
+        return '/?q=' + self.keyword
