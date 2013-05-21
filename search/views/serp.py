@@ -23,65 +23,41 @@ def serp(request):
     deadline = parse_string_param(request.GET.get('d'), None)
     ethnicity = parse_int_param(request.GET.get('e'), None)
     gender = parse_int_param(request.GET.get('g'), None)
-    refine = no_essay_required or deadline or ethnicity or gender
 
     search_req = SearchRequest(keyword, location, no_essay_required,
         deadline, ethnicity, gender)
     conn = ES(ELASTICSEARCH_URL)
 
-    # empty query
-    if not keyword and location == 'US':
+    # got a keyword
+    filters = []
+
+    if keyword:
+        query = MultiMatchQuery(text=keyword, fields=[es.title, es.description])
+    else:
         query = MatchAllQuery()
 
-    # got a keyword but no state
-    elif keyword and not refine and location and location == 'US':
-        query = MultiMatchQuery(text=keyword, fields=[es.title, es.description])
+    # attach a state filter
+    if location is not None and location != 'US':
+        state_filter = TermFilter(es.state_restriction, location)
+        filters.append(state_filter)
+    if no_essay_required:
+        no_essay_filter = TermFilter(es.essay_required, no_essay_required)
+        filters.append(no_essay_filter)
+    if deadline:
+        # logic bomb, just to keep things interesting
+        deadline_filter = RangeFilter(ESRange(es.deadline, deadline, '2100-1-1'))
+        filters.append(deadline_filter)
+    if ethnicity is not None:
+        ethnicity_filter = TermFilter(es.ethnicity_restriction, ethnicity)
+        filters.append(ethnicity_filter)
+    if gender is not None:
+        gender_filter = TermFilter(es.gender_restriction, gender)
+        filters.append(gender_filter)
+    # apply filters if we got any. otherwise run the keyword or empty everything
+    if len(filters) > 0:
+        and_filter = ANDFilter(filters)
+        query = FilteredQuery(query, and_filter)
 
-    # got a keyword and a state
-    elif keyword and not refine and location and location != 'US':
-        multi_query = MultiMatchQuery(text=keyword, fields=[es.title, es.description])
-        state_term_filter = TermFilter(es.state_restriction, location)
-        query = FilteredQuery(multi_query, state_term_filter)
-
-    # no keyword but a state
-    elif not keyword and location and location != 'US':
-        query = TermQuery(field=es.state_restriction, value=location)
-    else:
-        # got refine params
-        refine_restrictions = []
-        if no_essay_required:
-            refine_restrictions.append({
-                'term': { es.essay_required: False }
-            })
-        if deadline:
-            refine_restrictions.append({
-                'range': {
-                    'deadline': {
-                        'gte': deadline
-                    }
-                }
-            })
-        if ethnicity:
-            ethnicity_string = ETHNICITIES[ethnicity]
-            refine_restrictions.append({
-                'term': { es.ethnicity_restriction: ethnicity_string}
-            })
-        if gender:
-            gender_string = GENDER[gender]
-            refine_restrictions.append({
-                'term': { es.gender_restriction: gender_string}
-            })
-
-        query = {
-            'filtered': {
-                'query': {
-                    'match_all': {}
-                },
-                'filter': {
-                    'and': refine_restrictions
-                }
-            }
-        }
     search = Search(query, size=RESULTS_PER_PAGE, start=start)
     search.add_highlight(es.description, fragment_size=300, number_of_fragments=5)
     results = conn.search(search, indices=DEV_INDEX)
@@ -113,7 +89,7 @@ def serp(request):
                                   'prev_page_href': prev_page_href,
                                   'next_page_href': next_page_href,
                                   'start_index': start + 1,
-                                  'end_index': min(start + 1 + RESULTS_PER_PAGE, total_result_count),
+                                  'end_index': min(start + RESULTS_PER_PAGE, total_result_count),
                                   'results_per_page': RESULTS_PER_PAGE
                               }
     )

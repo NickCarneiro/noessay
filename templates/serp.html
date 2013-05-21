@@ -47,9 +47,11 @@
     </div>
     <div class="span9" id="serp-container">
     <div class="serp-promo-container">
+        {% if result_count > 0 %}
         <span class="pagination-label">
-            Scholarships {{ start_index }} to {{ end_index }} of {{ result_count }}
+        Scholarships {{ start_index }} to {{ end_index }} of {{ result_count }}
         </span>
+        {% endif %}
     </div>
         {% for scholarship in scholarship_list %}
             {% include "result_fragment.html" with result=scholarship%}

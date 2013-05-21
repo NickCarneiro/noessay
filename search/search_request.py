@@ -13,7 +13,15 @@ class SearchRequest:
     def get_base_url(self, start):
         url = '/search?q=' + self.keyword
         if self.location is not None:
-            url = url + '&l=' + self.location
+            url += '&l=' + self.location
+        if self.no_essay_required is not None:
+            url += '&ne=true'
+        if self.deadline is not None:
+            url += '&d=' + self.deadline
+        if self.ethnicity_restriction is not None:
+            url += '&e=' + str(self.ethnicity_restriction)
+        if self.gender_restriction is not None:
+            url += '&g=' + str(self.gender_restriction)
         if start is not None and start > 0:
-            url = url + '&start=' + str(start)
+            url += '&start=' + str(start)
         return url
