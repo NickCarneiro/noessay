@@ -14,7 +14,7 @@ class SearchRequest:
         url = '/search?q=' + self.keyword
         if self.location is not None:
             url += '&l=' + self.location
-        if self.no_essay_required is not None:
+        if self.no_essay_required:
             url += '&ne=true'
         if self.deadline is not None:
             url += '&d=' + self.deadline
