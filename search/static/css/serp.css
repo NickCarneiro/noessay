@@ -49,3 +49,7 @@ em {
 #pagination {
     text-align: center;
 }
+
+#location-combobox-refine-container {
+    margin-bottom: 10px;
+}

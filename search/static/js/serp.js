@@ -2,7 +2,8 @@ function submitRefine() {
     //construct object representing form state
     var refineForm = {};
     refineForm.q = ne.keyword;
-    refineForm.l = ne.state;
+    var $locationCombobox = $('#location-combobox-refine');
+    refineForm.l = $locationCombobox.val();
 
     refineForm.ne = $('#refine-no-essay-required').prop('checked');
     var deadline = $('#refine-deadline').val();
@@ -22,6 +23,10 @@ $(function() {
     $datePicker.val(ne.deadline);
     $('#refine-ethnicity').val(ne.ethnicity_restriction);
     $('#refine-gender').val(ne.gender_restriction);
+
+    var $locationCombobox = $('#location-combobox-refine');
+    $locationCombobox.select2({width: 180});
+    $locationCombobox.val(ne.state).trigger('change');
 
     // wire up clickables
     $('#refine-submit').on('click', submitRefine);

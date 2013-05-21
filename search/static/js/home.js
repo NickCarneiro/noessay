@@ -7,5 +7,6 @@ $(function() {
             $locationCombobox.val(stateCode).trigger('change');
         }
     }
+    $('#what').focus();
 
 });

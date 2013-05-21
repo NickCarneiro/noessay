@@ -23,12 +23,14 @@ input.what-input {
 
 #search-controls {
     margin: 0px auto;
-    width: 510px;
-    height: 70px;
+    text-align: center;
+
 }
 
 .input-container {
-    float: left;
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
 }
 
 .site-title {
@@ -50,4 +52,12 @@ input.what-input {
 
 #location-combobox-container .select2-choice > span {
     margin-top: 4px;
+}
+
+.hint {
+    color: #777;
+}
+
+.input-container input {
+    margin-bottom: 5px;
 }
