@@ -1,5 +1,5 @@
 from django.shortcuts import render_to_response
-from noessay.settings import DEV_INDEX
+from noessay.settings import ES_INDEX
 from search import request_utils
 from search.search_request import SearchRequest
 from search.serp_result import SerpResult
@@ -61,7 +61,7 @@ def serp(request):
 
     search = Search(query, size=RESULTS_PER_PAGE, start=start)
     search.add_highlight(es.description, fragment_size=300, number_of_fragments=5)
-    results = conn.search(search, indices=DEV_INDEX)
+    results = conn.search(search, indices=ES_INDEX)
     total_result_count = results.total
     scholarships = []
     for schol in results:
