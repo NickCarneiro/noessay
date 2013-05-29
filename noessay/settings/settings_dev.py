@@ -7,7 +7,7 @@ sys.path.append(base)
 sys.path.append(base_parent)
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-ENVIRONMENT = 'prod'
+ENVIRONMENT = 'dev'
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
