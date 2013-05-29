@@ -41,12 +41,10 @@ STATICFILES_DIRS = (
 # Don't forget to use absolute paths, not relative paths.
 )
 
-
-
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'noessay.wsgi.application'
 
-TEMPLATE_DIRS = ('/Users/burt/development/ne/templates',)
+TEMPLATE_DIRS = ('/var/www/ne_prod/templates',)
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -85,7 +83,7 @@ LOGGING = {
             'level': 'INFO',
             'class': 'logging.FileHandler',
             'filename': '/var/log/noessay-prod.log',
-            },
+        },
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
@@ -97,13 +95,13 @@ LOGGING = {
             'handlers': ['mail_admins', 'console', 'file'],
             'level': 'ERROR',
             'propagate': True,
-            },
         },
+    },
     'formatters': {
         'verbose': {
             'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
         },
-        }
+    }
 }
 
 #elasticsearch settings

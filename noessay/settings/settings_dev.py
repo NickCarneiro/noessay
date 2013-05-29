@@ -1,6 +1,7 @@
 # Django settings for noessay project.
 import os
 import sys
+from settings_default import *
 base = os.path.dirname(os.path.dirname(__file__))
 base_parent = os.path.dirname(base)
 sys.path.append(base)
@@ -104,12 +105,10 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'noessay.urls'
-
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'noessay.wsgi.application'
 
-TEMPLATE_DIRS = ('/Users/burt/development/ne/templates',)
+TEMPLATE_DIRS = ('/var/www/ne_dev/templates',)
 
 INSTALLED_APPS = (
     'django.contrib.auth',

@@ -47,3 +47,4 @@ STATICFILES_FINDERS = (
     #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
+ROOT_URLCONF = 'noessay.urls'
