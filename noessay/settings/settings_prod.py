@@ -1,6 +1,7 @@
 # Django settings for noessay project.
 import os
 import sys
+from settings_default import *
 base = os.path.dirname(os.path.dirname(__file__))
 base_parent = os.path.dirname(base)
 sys.path.append(base)
