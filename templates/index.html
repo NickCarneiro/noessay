@@ -92,7 +92,11 @@
 <script src="static/js/jquery.js"></script>
 <script src="static/js/select2.min.js"></script>
 <script src="http://j.maxmind.com/js/geoip.js" charset="ISO-8859-1" type="text/javascript" ></script>
-<script src="static/js/home.js"></script>
+{% if environment == 'dev' %}
+    <script src="static/js/home.js"></script>
+{% else %}
+    <script src="static/js/home.min.js"></script>
+{% endif %}
 {% include 'google_analytics_fragment.html' %}
 </body>
 </html>

@@ -14,7 +14,6 @@ function submitRefine() {
     refineForm.g = $('#refine-gender').val();
     var url = $.param(refineForm);
     window.location.href = '?' + url;
-
 }
 $(function() {
     var $datePicker = $('#refine-deadline').datepicker();

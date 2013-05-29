@@ -8,5 +8,4 @@ $(function() {
         }
     }
     $('#what').focus();
-
 });

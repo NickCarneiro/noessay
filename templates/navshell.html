@@ -6,11 +6,14 @@
     <title>No Essay Scholarships</title>
     <link rel="stylesheet" href="/static/css/bootstrap.css" />
     <link rel="stylesheet" href="/static/css/global.css" />
-    <link rel="stylesheet" href="/static/css/navshell.css" />
     <link rel="stylesheet" href="/static/css/select2.css" />
     <script src="/static/js/jquery.js"></script>
     <script src="/static/js/select2.min.js"></script>
-    <script src="/static/js/navshell.js"></script>
+    {% if environment == 'dev' %}
+        <script src="/static/js/navshell.js"></script>
+    {% else %}
+        <script src="/static/js/navshell.min.js"></script>
+    {%  endif %}
 </head>
 <body>
 <div id="navshell-header-bar">

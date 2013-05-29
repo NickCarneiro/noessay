@@ -7,6 +7,7 @@ from pyes import *
 from search.models import *
 from search.request_utils import *
 from search.elasticsearch_fields import EsFields as es
+from django.conf import settings
 
 ELASTICSEARCH_URL = 'noessay.com:9200'
 DESCRIPTION_LENGTH = 300
@@ -90,7 +91,8 @@ def serp(request):
                                   'next_page_href': next_page_href,
                                   'start_index': start + 1,
                                   'end_index': min(start + RESULTS_PER_PAGE, total_result_count),
-                                  'results_per_page': RESULTS_PER_PAGE
+                                  'results_per_page': RESULTS_PER_PAGE,
+                                  'environment': settings.ENVIRONMENT
                               }
     )
 
