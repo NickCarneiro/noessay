@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="/static/css/bootstrap.css" />
     <link rel="stylesheet" href="/static/css/global.css" />
     <link rel="stylesheet" href="/static/css/select2.css" />
-    <link rel="stylesheet" href="/static/css/home.css" />
 </head>
 <body>
 <div id="home-container" class="container">
@@ -18,7 +17,7 @@
                 <span>Comprehensive scholarship search</span>
             </div>
             <form action="/search" method="get">
-            <div id="search-controls" class="left-text">
+            <div id="home-search-controls" class="left-text">
 
                 <div class="input-container">
                     <label for="what">What</label> <input name="q" class="what-input" type="text" id="what" />
@@ -84,7 +83,7 @@
 
             </div>
 
-            <button class="block search-button btn" type="submit">Scholarship Search</button>
+            <button id="home-search-button" class="block btn" type="submit">Scholarship Search</button>
             </form>
         </div>
 
