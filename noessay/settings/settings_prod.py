@@ -164,3 +164,6 @@ LOGGING = {
 ES_INDEX = 'noessay-prod'
 SCHOLARSHIP_TYPE = 'scholarship'
 
+ALLOWED_HOSTS = [
+    '.noessay.com',
+]
