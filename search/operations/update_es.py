@@ -1,6 +1,7 @@
 # MySQL is the master set of scholarships
 # This script coeps them all into elasticsearch
 import os
+import sys
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "noessay.settings")
 
 from pyes import *
@@ -12,13 +13,19 @@ DEV_INDEX = 'noessay-dev'
 PROD_INDEX = 'noessay-prod'
 SCHOLARSHIP_TYPE = 'scholarship'
 
+if len(sys.argv) >= 2 and sys.argv[1] == 'prod':
+    index = PROD_INDEX
+else:
+    index = DEV_INDEX
+
+
 def create_index():
     try:
-        conn.indices.delete_index(DEV_INDEX)
+        conn.indices.delete_index(index)
     except:
         pass
 
-    conn.indices.create_index(DEV_INDEX)
+    conn.indices.create_index(index)
 
     mapping = {
         es.django_id: {
@@ -122,7 +129,7 @@ def create_index():
         }
     }
 
-    conn.indices.put_mapping(SCHOLARSHIP_TYPE, {'properties': mapping}, [DEV_INDEX])
+    conn.indices.put_mapping(SCHOLARSHIP_TYPE, {'properties': mapping}, [index])
 
 def populate_index():
     #iterate over all the scholarships and put them in es index
@@ -160,7 +167,7 @@ def populate_index():
             'gender_restriction': gender_restriction,
             'sponsored': s.sponsored
         }
-        conn.index(scholarship_es, DEV_INDEX, SCHOLARSHIP_TYPE)
+        conn.index(scholarship_es, index, SCHOLARSHIP_TYPE)
 
 
 def query_index():

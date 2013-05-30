@@ -72,9 +72,9 @@ STATIC_ROOT = '/var/www/ne_prod_static/'
 STATIC_URL = '/static/'
 # Additional locations of static files
 STATICFILES_DIRS = (
-# Put strings here, like "/home/html/static" or "C:/www/django/static".
-# Always use forward slashes, even on Windows.
-# Don't forget to use absolute paths, not relative paths.
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
 )
 
 # Make this unique, and don't share it with anybody.
@@ -151,13 +151,13 @@ LOGGING = {
             'handlers': ['mail_admins', 'console', 'file'],
             'level': 'ERROR',
             'propagate': True,
-            },
         },
+    },
     'formatters': {
         'verbose': {
             'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
         },
-        }
+    }
 }
 
 #elasticsearch settings
