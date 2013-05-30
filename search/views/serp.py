@@ -13,8 +13,8 @@ ELASTICSEARCH_URL = 'noessay.com:9200'
 DESCRIPTION_LENGTH = 300
 RESULTS_PER_PAGE = 10
 def serp(request):
-    keyword = request.GET.get('q')
-    location = request.GET.get('l')
+    keyword = parse_string_param(request.GET.get('q'), '')
+    location = parse_string_param(request.GET.get('l'), '')
 
     # refine params
     start = parse_int_param(request.GET.get('start'), 0)

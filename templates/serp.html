@@ -1,5 +1,8 @@
 {% extends "navshell.html" %}
 {% block content %}
+    {% if canonical_url %}
+        <link rel="canonical" href="{{ canonical_url }}">
+    {% endif %}
 <link rel="stylesheet" href="/static/css/jqueryui.css" />
 <script src="/static/js/jquery-ui-1.10.1.custom.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
