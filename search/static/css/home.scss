@@ -17,6 +17,7 @@ input.what-input {
 
 #home-search-button {
     margin: 0 auto;
+    margin-top: 10px;
     font-size: 18px;
     padding: 10px;
     width: 200px;
@@ -44,7 +45,6 @@ input.what-input {
 }
 
 #location-combobox-container {
-    margin-left: 10px;
 }
 
 #location-combobox-container .select2-container .select2-choice {
@@ -75,4 +75,8 @@ input.what-input {
 
 .left-text {
   text-align: left;
+}
+
+#what-container {
+  margin-right: 10px;
 }
