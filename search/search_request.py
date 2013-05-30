@@ -86,9 +86,9 @@ class SearchRequest:
         return url
 
     def get_canonical_url(self, keyword, location):
-        if keyword == "" and location == "":
+        if keyword == "" and (location == "" or location == "US"):
             return "/no-essay-scholarships"
 
-        if keyword == "" and location in self.states.values():
-            return "/scholarships-in-" + location
+        if keyword == "" and location in self.states:
+            return "/scholarships-in-" + str.lower(self.states[location])
         return None

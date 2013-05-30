@@ -79,6 +79,7 @@ def serp(request):
     is_last_page = RESULTS_PER_PAGE + start >= total_result_count
     next_page_href = search_req.get_base_url(start + RESULTS_PER_PAGE)
     prev_page_href = search_req.get_base_url(start - RESULTS_PER_PAGE)
+    canonical_url = search_req.get_canonical_url(keyword, location)
     return render_to_response('serp.html',
                               {
                                   'scholarship_list': scholarships,
@@ -92,7 +93,8 @@ def serp(request):
                                   'start_index': start + 1,
                                   'end_index': min(start + RESULTS_PER_PAGE, total_result_count),
                                   'results_per_page': RESULTS_PER_PAGE,
-                                  'environment': settings.ENVIRONMENT
+                                  'environment': settings.ENVIRONMENT,
+                                  'canonical_url': canonical_url,
                               }
     )
 

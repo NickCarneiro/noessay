@@ -16,6 +16,9 @@
     {% else %}
         <script src="/static/js/navshell.min.js"></script>
     {%  endif %}
+    {% if canonical_url %}
+        <link rel="canonical" href="{{ canonical_url }}">
+    {% endif %}
 </head>
 <body>
 <div id="navshell-header-bar">
