@@ -6,7 +6,7 @@ base = os.path.dirname(os.path.dirname(__file__))
 base_parent = os.path.dirname(base)
 sys.path.append(base)
 sys.path.append(base_parent)
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 ENVIRONMENT = 'dev'
 ADMINS = (
