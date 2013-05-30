@@ -131,6 +131,6 @@ def build_pagination_objects(result_count, start, search_req):
                          'page_number': current_page_number - i,
                          'start': page_start,
                          'href': href
-        })
+                        })
     return links
 

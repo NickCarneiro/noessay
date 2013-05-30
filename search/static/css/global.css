@@ -61,11 +61,14 @@ input.what-input {
 #serp-container {
   background: #fff;
   box-shadow: -3px 0px 5px #dfdfdf;
-  padding: 10px; }
+  padding: 10px;
+  max-width: 600px;
+  min-width: 320px; }
 
 #left-col-container {
   background: #ffffff;
-  padding: 10px; }
+  padding: 10px;
+  max-width: 260px; }
 
 .result-link {
   color: #12c;
@@ -98,7 +101,8 @@ em {
   font-weight: bold; }
 
 #pagination {
-  text-align: center; }
+  text-align: center;
+  font-size: 20px; }
 
 #location-combobox-refine-container {
   margin-bottom: 10px; }

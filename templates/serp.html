@@ -8,7 +8,8 @@
     {% else %}
         <script src="/static/js/serp.min.js"></script>
     {% endif %}
-<div class="row">
+<div class="container-fluid">
+<div class="row-fluid">
     <div id="left-col-container" class="span3">
         <h4>Refine your search</h4>
             <div>
@@ -123,24 +124,24 @@
 
         {% endif %}
         <div id="pagination">
-        {% if is_first_page == False %}
+        {% if not is_first_page %}
             <a href="{{ prev_page_href }}">&lt;&lt; Previous</a>
         {% endif %}
             {#        we've precomputed the pages#}
-            {% for link in page_links%}
+            {% for link in page_links %}
                 {% if link.current_page %}
                     {{ link.page_number }}
                 {% else %}
                     <a href="{{ link.href }}">{{ link.page_number }}</a>
                 {% endif %}
             {% endfor %}
-        {% if is_last_page == False %}
+        {% if not is_last_page %}
             <a href="{{ next_page_href }}">Next &gt;&gt;</a>
-
         {% endif %}
         </div>
     </div>
 
 
+</div>
 </div>
 {% endblock %}
