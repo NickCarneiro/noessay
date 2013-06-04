@@ -1,3 +1,4 @@
+from django.http import HttpResponseNotFound
 from django.shortcuts import render_to_response
 from noessay.settings import ES_INDEX
 from search import request_utils
@@ -12,9 +13,13 @@ from django.conf import settings
 ELASTICSEARCH_URL = 'noessay.com:9200'
 DESCRIPTION_LENGTH = 300
 RESULTS_PER_PAGE = 10
+
+
 def serp(request):
-    keyword = parse_string_param(request.GET.get('q'), '')
+
     location = parse_string_param(request.GET.get('l'), '')
+
+    keyword = parse_string_param(request.GET.get('q'), '')
 
     # refine params
     start = parse_int_param(request.GET.get('start'), 0)
@@ -135,4 +140,3 @@ def build_pagination_objects(result_count, start, search_req):
                          'href': href
                         })
     return links
-

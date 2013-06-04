@@ -21,7 +21,9 @@ urlpatterns = patterns('',
 
     #SEO canonical urls
     url(r'^no-essay-scholarships', 'search.views.serp', name='serp'),
-    url(r'^scholarships-in-texas', 'search.views.serp', name='serp'),
+    url(r'^scholarships-in-([a-zA-Z]+)', 'search.views.serp_canonical', name='serp_canonical'),
+    url(r'^404', 'search.views.not_found', name='not_found'),
+
 
 
 )

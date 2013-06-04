@@ -90,5 +90,5 @@ class SearchRequest:
             return "/no-essay-scholarships"
 
         if keyword == "" and location in self.states:
-            return "/scholarships-in-" + str.lower(self.states[location])
+            return "/scholarships-in-" + str.lower(self.states[location]).replace(' ', '-')
         return None

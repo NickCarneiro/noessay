@@ -1,1 +1,0 @@
-from canonical_url_middleware import *

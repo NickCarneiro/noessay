@@ -1,4 +1,5 @@
 import re
+from django.http import HttpResponsePermanentRedirect
 from pyDes import *
 import base64
 secret_key = 'Fitzgeralds remarks abou'
@@ -74,5 +75,75 @@ def parse_boolean_param(param):
     parsed = param == 'true' or param == 'True' or param == '1'
     return parsed
 
+states_name_to_codes = {
+    'alabama': 'AL',
+    'alaska': 'AK',
+    'arkansas': 'AR',
+    'arizona': 'AZ',
+    'california': 'CA',
+    'colorado': 'CO',
+    'connecticut': 'CT',
+    'district-of-colombia': 'DC',
+    'delaware': 'DE',
+    'florida': 'FL',
+    'georgia': 'GA',
+    'hawaii': 'HI',
+    'iowa': 'IA',
+    'idaho': 'ID',
+    'illinois': 'IL',
+    'indiana': 'IN',
+    'kansas': 'KS',
+    'kentucky': 'KY',
+    'louisiana': 'LA',
+    'massachusetts': 'MA',
+    'maryland': 'MD',
+    'maine': 'ME',
+    'michigan': 'MI',
+    'minnesota': 'MN',
+    'missouri': 'MO',
+    'mississippi': 'MS',
+    'montana': 'MT',
+    'north-carolina': 'NC',
+    'north-dakota': 'ND',
+    'nebraska': 'NE',
+    'new-hampsire': 'NH',
+    'new-jersey': 'NJ',
+    'new-mexico': 'NM',
+    'nevada': 'NV',
+    'new-york': 'NY',
+    'ohio': 'OH',
+    'oklahoma': 'OK',
+    'oregon': 'OR',
+    'pennsylvania': 'PA',
+    'puerto-rico': 'PR',
+    'rhode-island': 'RI',
+    'south-carolina': 'SC',
+    'south-dakota': 'SD',
+    'tennessee': 'TN',
+    'texas': 'TX',
+    'utah': 'UT',
+    'virgina': 'VA',
+    'vermont': 'VT',
+    'washington': 'WA',
+    'wisconsin': 'WI',
+    'west-virgina': 'WV',
+    'wyoming': 'WY'
+}
 
+def determine_search_terms(request, state_param):
+    #if we got actual params, just use those
+    if request.GET.get('q') or request.GET.get('l'):
+        return
+    state_name = state_param.lower()
+    if state_name is None:
+        return
 
+    request.GET = request.GET.copy()
+    if state_name in states_name_to_codes:
+        state_code = states_name_to_codes[state_name]
+        request.GET['q'] = ''
+        request.GET['l'] = state_code
+        return
+    else:
+        request.GET['404'] = True
+        return
