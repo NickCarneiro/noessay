@@ -16,13 +16,15 @@ urlpatterns = patterns('',
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
-    # Uncomment the next line to enable the a   dmin:
+    # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 
     #SEO canonical urls
     url(r'^no-essay-scholarships', 'search.views.serp', name='serp'),
     url(r'^scholarships-in-([a-zA-Z]+)', 'search.views.serp_canonical', name='serp_canonical'),
+    url(r'^sitemap.xml', 'search.views.sitemap', name='sitemap'),
     url(r'^404', 'search.views.not_found', name='not_found'),
+
 
 
 
