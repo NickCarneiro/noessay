@@ -64,7 +64,7 @@ class Scholarship(models.Model):
     ethnicity_restriction = models.SmallIntegerField(choices=ETHNICITIES, blank=True, null=True)
     gender_restriction = models.SmallIntegerField(choices=GENDER, blank=True, null=True)
     sponsored = models.BooleanField()
-    status = models.SmallIntegerField(choices=STATUS, blank=True, null=True)
+    status = models.SmallIntegerField(choices=STATUS, blank=True, null=True, editable=False, default=0)
 
     def __unicode__(self):
         return self.title

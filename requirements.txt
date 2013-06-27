@@ -1,3 +1,4 @@
+requests
 Django==1.5
 pyDes==2.0.1
 pyes==0.19.2dev

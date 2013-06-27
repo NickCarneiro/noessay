@@ -133,7 +133,7 @@ def create_index():
 
 def populate_index():
     #iterate over all the scholarships and put them in es index
-    scholarships = Scholarship.objects.filter()
+    scholarships = Scholarship.objects.filter(status=0)
     for s in scholarships:
         print s.title
         university_name = None
