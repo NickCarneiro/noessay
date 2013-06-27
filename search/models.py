@@ -24,6 +24,11 @@ ETHNICITIES = (
     (6, 'Hispanic')
 )
 
+STATUS = (
+    (0, 'active'),
+    (1, 'expired')
+)
+
 
 class University(models.Model):
     homepage_url = models.URLField()
@@ -59,6 +64,7 @@ class Scholarship(models.Model):
     ethnicity_restriction = models.SmallIntegerField(choices=ETHNICITIES, blank=True, null=True)
     gender_restriction = models.SmallIntegerField(choices=GENDER, blank=True, null=True)
     sponsored = models.BooleanField()
+    status = models.SmallIntegerField(choices=STATUS, blank=True, null=True)
 
     def __unicode__(self):
         return self.title
