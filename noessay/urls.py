@@ -24,6 +24,8 @@ urlpatterns = patterns('',
     url(r'^scholarships-in-([a-zA-Z]+)', 'search.views.serp_canonical', name='serp_canonical'),
     url(r'^sitemap.xml', 'search.views.sitemap', name='sitemap'),
     url(r'^404', 'search.views.not_found', name='not_found'),
+    url(r'^check', 'search.views.check_for_scholarship', name='check_for_scholarship'),
+    url(r'^aggregation', 'search.views.aggregation', name='aggregation'),
 
 
 
