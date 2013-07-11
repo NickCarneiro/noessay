@@ -18,6 +18,8 @@ if len(sys.argv) >= 2 and sys.argv[1] == 'prod':
 else:
     index = DEV_INDEX
 
+print 'building ' + index
+
 
 def create_index():
     try:
@@ -79,7 +81,7 @@ def create_index():
             'store': 'yes',
             'type': 'integer'
         },
-        es.state_restriction: { # 2 letter postal code like TX
+        es.state_restriction: {  # 2 letter postal code like TX
             'index': 'not_analyzed',
             'store': 'yes',
             'type': 'string'
@@ -131,9 +133,10 @@ def create_index():
 
     conn.indices.put_mapping(SCHOLARSHIP_TYPE, {'properties': mapping}, [index])
 
+
 def populate_index():
     #iterate over all the scholarships and put them in es index
-    scholarships = Scholarship.objects.filter()
+    scholarships = Scholarship.objects.filter(status=0)
     for s in scholarships:
         print s.title
         university_name = None
@@ -175,7 +178,6 @@ def query_index():
     results = conn.search(query=q)
     for r in results:
         print r
-
 
 
 create_index()
