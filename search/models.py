@@ -29,6 +29,13 @@ STATUS = (
     (1, 'expired')
 )
 
+DEADLINE_TYPES = (
+    (0, 'Regular'),
+    (1, 'Weekly'),
+    (2, 'Monthly'),
+    (3, 'Unknown')
+)
+
 
 class University(models.Model):
     homepage_url = models.URLField()
@@ -50,10 +57,16 @@ class Scholarship(models.Model):
     third_party_url = models.URLField()
     description = models.TextField()
     date_added = models.DateField()
-    deadline = models.DateField(blank=True)
+    deadline = models.DateField(blank=True, null=True)
+    deadline2 = models.DateField(blank=True, null=True)
+    deadline3 = models.DateField(blank=True, null=True)
+    deadline_type = models.SmallIntegerField(choices=DEADLINE_TYPES, default=0)
     essay_required = models.BooleanField()
     amount_usd = models.IntegerField(blank=True, null=True)
     organization = models.CharField(max_length=200)
+    high_school_eligible = models.BooleanField(default=True)
+    undergrad_eligible = models.BooleanField(default=True)
+    graduate_eligible = models.BooleanField(default=True)
     min_age_restriction = models.SmallIntegerField(blank=True, null=True)
     state_restriction = USStateField(blank=True)
     essay_length_words = models.IntegerField(blank=True, null=True)
