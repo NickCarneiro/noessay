@@ -56,7 +56,7 @@ class Scholarship(models.Model):
     title = models.CharField(max_length=400)
     third_party_url = models.URLField()
     description = models.TextField()
-    date_added = models.DateField()
+    date_added = models.DateField(auto_now_add=True, blank=True)
     deadline = models.DateField(blank=True, null=True)
     deadline2 = models.DateField(blank=True, null=True)
     deadline3 = models.DateField(blank=True, null=True)
