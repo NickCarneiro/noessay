@@ -55,6 +55,7 @@ class University(models.Model):
 class Scholarship(models.Model):
     title = models.CharField(max_length=400)
     third_party_url = models.URLField()
+    street_address = models.TextField(blank=True, null=True)
     description = models.TextField()
     date_added = models.DateField(auto_now_add=True, blank=True)
     deadline = models.DateField(blank=True, null=True)
