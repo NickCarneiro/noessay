@@ -59,6 +59,10 @@ input.what-input {
 #what-container {
   margin-right: 10px; }
 
+#scholarship-count {
+  margin-top: 15px;
+  color: #777; }
+
 #serp-container {
   background: #fff;
   box-shadow: -3px 0px 5px #dfdfdf;

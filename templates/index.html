@@ -1,3 +1,4 @@
+{% load humanize %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,6 +89,9 @@
 
             <button id="home-search-button" class="block btn" type="submit">Scholarship Search</button>
             </form>
+            <div id="scholarship-count">
+                Searching <a href="/search?q=&l=US&from=home">{{ scholarship_count | intcomma}} scholarships </a>
+            </div>
         </div>
 
     </div>
