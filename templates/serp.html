@@ -1,4 +1,5 @@
 {% extends "navshell.html" %}
+{% load humanize %}
 {% block content %}
 
 <link rel="stylesheet" href="/static/css/jqueryui.css" />
@@ -111,7 +112,7 @@
     <div class="serp-promo-container">
         {% if result_count > 0 %}
         <span class="pagination-label">
-        Scholarships {{ start_index }} to {{ end_index }} of {{ result_count }}
+        Scholarships {{ start_index }} to {{ end_index }} of {{ result_count | intcomma }}
         </span>
         {% endif %}
     </div>
