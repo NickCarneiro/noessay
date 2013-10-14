@@ -6,7 +6,7 @@
             <div class="content-block span9">
             {% if user.is_superuser %}
                 <div>
-                    <a href="/admin/search/scholarship/{{ scholarship_model.pk }}/" rel="nofollow">
+                    <a href="/admin/search/scholarship/{{ scholarship_model.pk }}/">
                         Edit
                     </a>
                 </div>
@@ -26,7 +26,7 @@
 
             </div>
             <div class="light-text">{{ scholarship_model.third_party_url }}</div>
-            <a href="{{ scholarship_model.third_party_url }}">
+            <a href="{{ scholarship_model.third_party_url }}" rel="nofollow">
                 <button class="btn btn-primary apply-button">Apply now</button>
             </a>
 
