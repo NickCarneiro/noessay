@@ -4,7 +4,8 @@ $(function() {
     if (window['geoip_region']) {
         var stateCode = geoip_region();
         if ($.type(stateCode) === 'string') {
-            $locationCombobox.val(stateCode).trigger('change');
+            // disable geo IP for now
+            //$locationCombobox.val(stateCode).trigger('change');
         }
     }
     $('#what').focus();
