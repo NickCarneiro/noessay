@@ -29,4 +29,7 @@ $(function() {
 
     // wire up clickables
     $('#refine-submit').on('click', submitRefine);
+
+    // ne gets defined in footer_script.html
+    mixpanel.track('search', window['ne']);
 });
