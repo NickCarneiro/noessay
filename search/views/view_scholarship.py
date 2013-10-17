@@ -8,5 +8,5 @@ def view_scholarship(request):
 
     scholarship = Scholarship.objects.get(id=scholarship_id)
     return render_to_response('view_scholarship.html',
-                              {'scholarship_model': scholarship},
+                              {'scholarship_model': scholarship, 'scholarship_key': scholarship_key},
                               context_instance=RequestContext(request))
