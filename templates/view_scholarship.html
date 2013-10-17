@@ -1,6 +1,11 @@
 {% extends "navshell.html" %}
 {% load app_filters %}
 {% block content %}
+    {% if environment == 'dev' %}
+        <script src="/static/js/viewschol.js"></script>
+    {% else %}
+        <script src="/static/js/viewschol.min.js"></script>
+    {% endif %}
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="content-block span9">
@@ -41,14 +46,6 @@
             {% endif %}
             </div>
         </div>
-        <script type="text/javascript">
-            function trackApplyClick() {
-                var loggingParameters = {
-                    "schol_key": "{{ scholarship_key }}"
-                }
-                mixpanel.track("apply now clicked", loggingParameters);
-            }
-        </script>
     </div>
 
 
