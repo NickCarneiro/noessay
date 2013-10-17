@@ -15,6 +15,14 @@ function submitRefine() {
     var url = $.param(refineForm);
     window.location.href = '?' + url;
 }
+
+function trackScholarshipClick(scholarshipKey) {
+    var loggingParameters = {
+        "schol_key": scholarshipKey
+    }
+    mixpanel.track("serp result clicked", loggingParameters);
+}
+
 $(function() {
     var $datePicker = $('#refine-deadline').datepicker();
     //make refine form match page state
