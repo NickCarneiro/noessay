@@ -31,7 +31,7 @@
 
             </div>
             <div class="light-text">{{ scholarship_model.third_party_url }}</div>
-            <a onclick="trackApplyClick()" href="{{ scholarship_model.third_party_url }}" rel="nofollow">
+            <a id="apply-now" href="{{ scholarship_model.third_party_url }}" rel="nofollow" data-scholkey="{{ scholarship_key }}">
                 <button class="btn btn-primary apply-button">Apply now</button>
             </a>
 

@@ -1,5 +1,5 @@
 <div class="result-container">
-    <a class="result-link" href="{{ result.vs_href }}" target="_blank" onclick="trackScholarshipClick('{{ result.scholarship_key }}')">{{ result.title }}</a>
+    <a class="result-link" href="{{ result.vs_href }}" target="_blank" data-scholkey="{{ result.scholarship_key }}">{{ result.title }}</a>
     <div class="result-source">{{ result.source }}</div>
     <div>{{ result.snippet|safe }}</div>
     {% if result.deadline %}

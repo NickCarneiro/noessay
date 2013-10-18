@@ -15,14 +15,20 @@ function submitRefine() {
     var url = $.param(refineForm);
     window.location.href = '?' + url;
 }
-
-function trackScholarshipClick(scholarshipKey) {
-    var loggingParameters = {
-        "schol_key": scholarshipKey
+function resultClick(event) {
+    if (!event) {
+        // Older versions of IE use a global reference and not an argument.
+        event = window.event;
     }
-    mixpanel.track("serp result clicked", loggingParameters);
-}
 
+    // DOM uses 'target'; older versions of IE use 'srcElement'
+    var element = (event.target || event.srcElement);
+
+    var loggingParameters = {
+        "schol_key": $(element).data('scholkey')
+    }
+    mixpanel.track("search#resultclick", loggingParameters);
+}
 $(function() {
     var $datePicker = $('#refine-deadline').datepicker();
     //make refine form match page state
@@ -37,6 +43,7 @@ $(function() {
 
     // wire up clickables
     $('#refine-submit').on('click', submitRefine);
+    $('.result-link').on('click', resultClick);
 
     // ne gets defined in footer_script.html
     mixpanel.track('search', window['ne']);
