@@ -15,17 +15,9 @@ function submitRefine() {
     var url = $.param(refineForm);
     window.location.href = '?' + url;
 }
-function resultClick(event) {
-    if (!event) {
-        // Older versions of IE use a global reference and not an argument.
-        event = window.event;
-    }
-
-    // DOM uses 'target'; older versions of IE use 'srcElement'
-    var element = (event.target || event.srcElement);
-
+function resultClick() {
     var loggingParameters = {
-        "schol_key": $(element).data('scholkey')
+        "schol_key": $(this).data('scholkey')
     }
     mixpanel.track("search#resultclick", loggingParameters);
 }
