@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
-import search
+from django.views.generic import TemplateView
 
 admin.autodiscover()
 
@@ -23,6 +23,7 @@ urlpatterns = patterns('',
     url(r'^no-essay-scholarships', 'search.views.serp', name='serp'),
     url(r'^scholarships-in-([a-zA-Z]+)', 'search.views.serp_canonical', name='serp_canonical'),
     url(r'^sitemap.xml', 'search.views.sitemap', name='sitemap'),
+    url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
     url(r'^404', 'search.views.not_found', name='not_found'),
     url(r'^check', 'search.views.check_for_scholarship', name='check_for_scholarship'),
     url(r'^aggregation', 'search.views.aggregation', name='aggregation'),

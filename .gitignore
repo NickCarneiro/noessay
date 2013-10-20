@@ -11,3 +11,4 @@ local_settings.py
 .DS_Store
 log/
 target/
+local.py
