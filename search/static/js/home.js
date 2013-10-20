@@ -9,4 +9,5 @@ $(function() {
         }
     }
     $('#what').focus();
+    mixpanel.track('homepage');
 });
