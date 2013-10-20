@@ -7,4 +7,5 @@ pyes==0.20.0
 gunicorn==18.0
 google==1.05
 mixpanel-py==3.0.0
+raven==3.5.0
 
