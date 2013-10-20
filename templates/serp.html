@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="{% static "css/jqueryui.css" %}" />
 <script src="{% static "js/jquery-ui-1.10.1.custom.js" %}"></script>
 <script src="{% static "js/bootstrap.min.js"%}"></script>
+<link rel="stylesheet" href="{%  static "css/font-awesome.min.css" %}">
     {% if environment == 'dev' %}
         <script src="{% static "js/serp.js" %}"></script>
     {% else %}
@@ -128,7 +129,7 @@
         {% endif %}
         <div id="pagination">
         {% if not is_first_page %}
-            <a href="{{ prev_page_href }}">&lt;&lt; Previous</a>
+            <a href="{{ prev_page_href }}"><i class="icon-circle-arrow-left"></i> Previous</a>
         {% endif %}
             {#        we've precomputed the pages#}
             {% if result_count > results_per_page %}
@@ -143,7 +144,7 @@
                 {% endfor %}
             {% endif %}
         {% if not is_last_page %}
-            <a href="{{ next_page_href }}">Next &gt;&gt;</a>
+            <a href="{{ next_page_href }}">Next <i class="icon-circle-arrow-right"></i></a>
         {% endif %}
         </div>
     </div>

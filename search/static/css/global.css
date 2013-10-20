@@ -115,6 +115,9 @@ em {
 @media (max-width: 1037px) {
   #left-col-container {
     display: none; } }
+.pagination-arrow {
+  font-size: 30px; }
+
 #navshell-search-button {
   margin-bottom: 10px;
   margin-left: 20px; }
