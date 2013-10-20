@@ -85,6 +85,8 @@ def serp(request):
     next_page_href = search_req.get_base_url(start + RESULTS_PER_PAGE)
     prev_page_href = search_req.get_base_url(start - RESULTS_PER_PAGE)
     canonical_url = search_req.get_canonical_url(keyword, location)
+    meta_keywords = get_meta_keywords(query=keyword, location=location)
+    meta_description = get_meta_description(total_result_count=total_result_count, query=keyword, location=location)
     return render_to_response('serp.html',
                               {
                                   'scholarship_list': scholarships,
@@ -100,7 +102,9 @@ def serp(request):
                                   'results_per_page': RESULTS_PER_PAGE,
                                   'environment': settings.ENVIRONMENT,
                                   'canonical_url': canonical_url,
-                              }
+                                  'meta_description': meta_description,
+                                  'meta_keywords': meta_keywords,
+                                  }
     )
 
 
@@ -140,3 +144,39 @@ def build_pagination_objects(result_count, start, search_req):
                          'href': href
                         })
     return links
+
+
+def get_meta_description(total_result_count, query, location):
+    meta_description = str(total_result_count)
+
+    if query:
+        meta_description += " " + query
+
+    if total_result_count == 0:
+        #Don't add a description for ZRPs
+        return None
+    elif total_result_count == 1:
+        meta_description += " scholarship"
+    else:
+        meta_description += " scholarships"
+
+    if location and location != "US":
+        meta_description += " found in " + request_utils.states_codes_to_names[location]
+
+    meta_description += " on NoEssay.com."
+
+    return meta_description
+
+
+def get_meta_keywords(query, location):
+    keywords = ["Scholarships"]
+    if query:
+        keywords.append(query + " scholarships")
+
+    if location and location != "US":
+        friendly_location = request_utils.states_codes_to_names[location]
+        keywords.append("Scholarships in " + friendly_location)
+        keywords.append(friendly_location + " scholarships")
+        if query:
+            keywords.append(query + " scholarships in " + friendly_location)
+    return ', '.join(keywords)
