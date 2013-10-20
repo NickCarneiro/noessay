@@ -1,0 +1,5 @@
+import sys
+globals().update(vars(sys.modules['noessay.settings']))
+TEMPLATE_DIRS = ('/Users/burt/development/ne/templates',)
+
+LOGGING['handlers']['file']['filename'] = '/var/log/noessay-dev.log'
