@@ -1,10 +1,11 @@
 {% extends "navshell.html" %}
+{% load static from staticfiles %}
 {% load app_filters %}
 {% block content %}
     {% if environment == 'dev' %}
-        <script src="/static/js/viewschol.js"></script>
+        <script src="{% static "js/viewschol.js" %}"></script>
     {% else %}
-        <script src="/static/js/viewschol.min.js"></script>
+        <script src="{% static "/static/js/viewschol.min.js" %}"></script>
     {% endif %}
     <div class="container-fluid">
         <div class="row-fluid">
