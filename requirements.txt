@@ -8,4 +8,6 @@ gunicorn==18.0
 google==1.05
 mixpanel-py==3.0.0
 raven==3.5.0
+requests==2.0.0
+pyquery==1.2.6
 
