@@ -145,7 +145,7 @@ ES_INDEX = 'noessay-dev'
 ENVIRONMENT = 'dev'
 
 STATIC_URL = '/static/'
-
+SECRET_KEY = 'oh god I did not know we needed this!'
 try:
     from .local import *
 except ImportError:
