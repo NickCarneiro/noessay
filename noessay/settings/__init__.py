@@ -155,6 +155,7 @@ ENVIRONMENT = 'dev'
 
 STATIC_URL = '/static/'
 SECRET_KEY = 'oh god I did not know we needed this!'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
 try:
     from .local import *
 except ImportError:
