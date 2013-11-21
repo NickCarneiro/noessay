@@ -87,6 +87,11 @@ def serp(request):
     canonical_url = search_req.get_canonical_url(keyword, location)
     meta_keywords = get_meta_keywords(query=keyword, location=location)
     meta_description = get_meta_description(total_result_count=total_result_count, query=keyword, location=location)
+    if location == 'US':
+        title_location = 'the United States'
+    else:
+        title_location = location
+    page_title = '{} scholarships in {} | NoEssay.com'.format(keyword, title_location)
     return render_to_response('serp.html',
                               {
                                   'scholarship_list': scholarships,
@@ -104,6 +109,7 @@ def serp(request):
                                   'canonical_url': canonical_url,
                                   'meta_description': meta_description,
                                   'meta_keywords': meta_keywords,
+                                  'page_title': page_title
                                   }
     )
 

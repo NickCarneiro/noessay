@@ -10,6 +10,10 @@ def view_scholarship(request, scholarship_key):
     scholarship_id = request_utils.decrypt_sk(scholarship_key)
 
     scholarship = Scholarship.objects.get(id=scholarship_id)
+    context = {'scholarship_model': scholarship,
+               'scholarship_key': scholarship_key,
+               'page_title': scholarship.title
+    }
     return render_to_response('view_scholarship.html',
-                              {'scholarship_model': scholarship, 'scholarship_key': scholarship_key},
+                              context,
                               context_instance=RequestContext(request))
