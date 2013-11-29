@@ -1,7 +1,14 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
 from search import request_utils
 from search.models import Scholarship
+
+
+def scholarship_redirect(request):
+    sk = request.GET.get('sk')
+    title = request.GET.get('title')
+    redirect_url = '/scholarship/{}/?title={}'.format(sk, title)
+    return redirect(redirect_url, permanent=True)
 
 
 def view_scholarship(request, scholarship_key):
