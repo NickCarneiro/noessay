@@ -11,4 +11,5 @@ class SerpResult:
         self.title = scholarship_model.title
         self.essay_required = scholarship_model.essay_required
         self.gender_restriction = scholarship_model.gender_restriction
-        self.vs_href = u'/scholarship/{}?title={}'.format(self.scholarship_key, scholarship_model.title[:100])
+        safe_title = scholarship_model.title[:100].encode('ascii', 'ignore')
+        self.vs_href = u'/scholarship/{}?title={}'.format(self.scholarship_key, safe_title)

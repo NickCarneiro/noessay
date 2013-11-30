@@ -7,7 +7,8 @@ from search.models import Scholarship
 def scholarship_redirect(request):
     sk = request.GET.get('sk')
     title = request.GET.get('title')
-    redirect_url = '/scholarship/{}/?title={}'.format(sk, title)
+    safe_title = title.encode('ascii', 'ignore')
+    redirect_url = '/scholarship/{}/?title={}'.format(sk, safe_title)
     return redirect(redirect_url, permanent=True)
 
 
