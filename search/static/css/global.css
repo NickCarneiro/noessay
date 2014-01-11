@@ -28,7 +28,8 @@ input.what-input {
   text-align: left; }
 
 .site-title {
-  font-size: 50px; }
+  font-size: 50px;
+  margin-bottom: 50px; }
 
 #logo-container {
   margin: 20% 0px 20px 0px; }
@@ -62,6 +63,9 @@ input.what-input {
 #scholarship-count {
   margin-top: 15px;
   color: #777; }
+
+.announcement {
+  font-size: 30px; }
 
 #serp-container {
   background: #fff;
